@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Registration Form</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			background-color: #f2f2f2;
+		}
+	h1 {
+		text-align: center;
+		margin-top: 50px;
+		margin-bottom: 50px;
+		color: #333;
+	}
+
+	form {
+		background-color: #fff;
+		border-radius: 5px;
+		box-shadow: 0 0 10px rgba(0,0,0,0.2);
+		margin: 0 auto;
+		padding: 30px;
+		max-width: 500px;
+		box-sizing: border-box;
+	}
+
+	label {
+		display: inline-block;
+		width: 120px;
+		text-align: right;
+		margin: 10px;
+		color: #666;
+	}
+
+	input[type="text"], input[type="password"], select {
+		width: 200px;
+		padding: 5px;
+		margin: 10px;
+		border-radius: 5px;
+		border: 1px solid #ccc;
+		font-size: 16px;
+	}
+
+	input[type="radio"] {
+		margin: 10px;
+	}
+
+	button[type="submit"], button[type="button"] {
+		padding: 10px;
+		margin: 10px;
+		border-radius: 5px;
+		background-color: #4CAF50;
+		color: #fff;
+		font-size: 16px;
+		border: none;
+		cursor: pointer;
+		transition: background-color 0.3s;
+	}
+
+	button[type="submit"]:hover, button[type="button"]:hover {
+		background-color: #3e8e41;
+	}
+
+	.error {
+		color: red;
+		font-size: 14px;
+		margin-left: 10px;
+	}
+
+	.success {
+		color: green;
+		font-size: 14px;
+		margin-left: 10px;
+	}
+</style>
+</head>
+<body>
+<h1>Registration Form</h1>
+
+<form>
+	<label for="first-name">First Name:</label>
+	<input type="text" id="first-name" name="first-name" required>
+
+	<label for="last-name">Last Name:</label>
+	<input type="text" id="last-name" name="last-name" required>
+
+	<label for="gender">Gender: Male</label>
+	<input type="radio" id="male" name="gender" value="male" required>
+	<label for="female">Female</label>
+	<input type="radio" id="female" name="gender" value="female" required>
+
+	<label for="address-1">Address 1:</label>
+	<input type="text" id="address-1" name="address-1" required>
+
+	<label for="address-2">Address 2:</label>
+	<input type="text" id="address-2" name="address-2">
+
+	<label for="city">City:</label>
+	<input type="text" id="city" name="city" required>
+
+	<label for="state">State:</label>
+	<select id="state" name="state" required>
+		<option value="">Please select</option>
+		<option value="perlis">Perlis</option>
+		<option value="kedah">Kedah</option>
+    <option value="kelantan">Kelantan</option>
+    <option value="terengganu">Terengganu</option>
+    <option value="pahang">Pahang</option>
+    <option value="selangor">Selangor</option>
+    <option value="kuala-lumpur">Kuala Lumpur</option>
+    <option value="putrajaya">Putrajaya</option>
+    <option value="negeri-sembilan">Negeri Sembilan</option>
+    <option value="melaka">Melaka</option>
+    <option value="johor">Johor</option>
+    <option value="sabah">Sabah</option>
+    <option value="sarawak">Sarawak</option>
+</select>
+<label for="postcode">Postcode:</label>
+<input type="text" id="postcode" name="postcode" required>
+
+<label for="email">Email:</label>
+<input type="email" id="email" name="email" required>
+
+<label for="password">Password:</label>
+<input type="password" id="password" name="password" required>
+
+<button type="submit" name="submit">Submit</button>
+<button type="button" name="reset">Reset</button>
+</form>
+<script>
+const form = document.querySelector('form');
+const firstName = document.querySelector('#first-name');
+const lastName = document.querySelector('#last-name');
+const gender = document.querySelector('input[name="gender"]:checked');
+const address1 = document.querySelector('#address-1');
+const address2 = document.querySelector('#address-2');
+const city = document.querySelector('#city');
+const state = document.querySelector('#state');
+const postcode = document.querySelector('#postcode');
+const email = document.querySelector('#email');
+const password = document.querySelector('#password');
+
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const errors = [];
+
+    if (firstName.value === '') {
+        errors.push('First name is required');
+    }
+
+    if (lastName.value === '') {
+        errors.push('Last name is required');
+    }
+
+    if (address1.value === '') {
+        errors.push('Address 1 is required');
+    }
+
+    if (city.value === '') {
+        errors.push('City is required');
+    }
+
+    if (state.value === '') {
+        errors.push('State is required');
+    }
+
+    if (postcode.value === '') {
+        errors.push('Postcode is required');
+    }
+
+    if (email.value === '') {
+        errors.push('Email is required');
+    }
+
+    if (password.value === '') {
+        errors.push('Password is required');
+    }
+
+    if (errors.length > 0) {
+        const errorDiv = document.createElement('div');
+        errorDiv.classList.add('error');
+        errorDiv.innerText = errors.join('\n');
+        form.insertBefore(errorDiv, form.firstElementChild);
+    } else {
+        const successDiv = document.createElement('div');
+        successDiv.classList.add('success');
+        successDiv.innerText = 'Form submitted successfully';
+        form.insertBefore(successDiv, form.firstElementChild);
+    }
+});
+
+const resetBtn = document.querySelector('button[name="reset"]');
+resetBtn.addEventListener('click', () => {
+    form.reset();
+});
+</script>
+</body>
+</html>
